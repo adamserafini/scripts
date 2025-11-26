@@ -24,9 +24,16 @@ fi
 # REPL loop
 while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
 
-    echo "Generating command..."
+    echo -n "Generating command"
     # Use aider to modify the script, silently
-    aider --yes --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1
+    aider --yes --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1 &
+    pid=$!
+    while kill -0 $pid 2>/dev/null; do
+        echo -n "."
+        sleep 1
+    done
+    wait $pid
+    echo ""
 
     # Inner loop for Run/Refine/Quit prompt
     while true; do
