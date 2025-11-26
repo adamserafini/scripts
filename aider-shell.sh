@@ -1,5 +1,3 @@
-#!/bin/bash
-
 
 # Create a unique temporary file and make it executable
 temp_script=$(mktemp)
