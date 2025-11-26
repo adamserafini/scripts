@@ -27,21 +27,39 @@ while true; do
         break
     fi
 
-    # Use aider to modify the script
-    aider --no-git "$temp_script" -m "$user_request"
+    echo "Generating command..."
+    # Use aider to modify the script, silently
+    aider --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1
 
-    echo "=================================================="
-    echo "Current script ($temp_script):"
-    echo "--------------------------------------------------"
-    cat "$temp_script"
-    echo "--------------------------------------------------"
-    
-    echo "Running script:"
-    echo "--------------------------------------------------"
-    "$temp_script"
-    echo "--------------------------------------------------"
+    # Inner loop for Run/Refine/Quit prompt
+    while true; do
+        echo ""
+        echo "Proposed command:"
+        tail -n +2 "$temp_script"
+        echo ""
 
-    user_request=""
+        read -p "(r)un, re(f)ine, or (q)uit? " action
+
+        case "$action" in
+            r|R)
+                echo "Running command..."
+                "$temp_script"
+                user_request="" # Clear for next iteration to ask for new request
+                break # break inner loop
+                ;;
+            f|F)
+                read -p "Enter your refinement: " user_request
+                break # break inner loop
+                ;;
+            q|Q)
+                break 2 # break outer loop
+                ;;
+            *)
+                echo "Invalid option."
+                # inner loop continues, re-displaying command and prompt
+                ;;
+        esac
+    done
 done
 
 echo "Exiting."
