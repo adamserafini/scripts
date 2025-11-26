@@ -8,9 +8,9 @@ A simple REPL to interactively build and run shell commands using `aider`.
     ```sh
     chmod +x aider-shell.sh
     ```
-2.  Move it to a directory in your `$PATH`, for example:
+2.  Symlink it to a directory in your `$PATH`. This allows you to edit the script in place.
     ```sh
-    mv aider-shell.sh /usr/local/bin/aider-shell
+    ln -s "$(pwd)/aider-shell.sh" /usr/local/bin/aider-shell
     ```
 
 ## Usage
