@@ -51,7 +51,7 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
                 echo "Running command..."
                 command_to_run=$(tail -n +2 "$temp_script")
                 history -s "$command_to_run"
-                "$temp_script"
+                eval "$command_to_run"
                 ;;
             f|F)
                 read -p "Enter your refinement: " user_request
