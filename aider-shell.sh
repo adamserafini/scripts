@@ -17,6 +17,7 @@ trap cleanup EXIT
 
 user_request="$@"
 
+# What is the point of this clause AI?
 if [ -z "$user_request" ]; then
     read -p "Enter your request (or 'exit'/'quit'): " user_request
 fi
