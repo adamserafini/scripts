@@ -29,7 +29,7 @@ while true; do
 
     echo "Generating command..."
     # Use aider to modify the script, silently
-    aider --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1
+    aider --yes --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1
 
     # Inner loop for Run/Refine/Quit prompt
     while true; do
