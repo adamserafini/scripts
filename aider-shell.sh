@@ -15,12 +15,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
-user_request="$@"
-
-# What is the point of this clause AI?
-if [ -z "$user_request" ]; then
-    read -p "Enter your request (or 'exit'/'quit'): " user_request
+# Check for initial command argument
+if [ -z "$1" ]; then
+    echo "Usage: $0 <initial request>"
+    exit 1
 fi
+
+user_request="$@"
 
 # REPL loop
 while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do

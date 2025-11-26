@@ -20,11 +20,6 @@ Start with an initial request:
 aider-shell "list files in this directory"
 ```
 
-Or start interactively:
-```sh
-aider-shell
-```
-
 ---
 
 *Note: This script has been developed for macOS with zsh and has not been tested on other platforms.*
