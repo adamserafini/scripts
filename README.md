@@ -4,12 +4,9 @@ A simple REPL to interactively build and run shell commands using `aider`.
 
 ## Installation (macOS/zsh)
 
-1.  Add the following function to your `~/.zshrc` file.
-    Make sure to replace `/path/to/your/aider-shell.sh` with the actual absolute path to where you've cloned this repository.
+1.  From the repository directory, run this command to add the `aider-shell` function to your `~/.zshrc`:
     ```sh
-    aider-shell() {
-        source /path/to/your/aider-shell.sh "$@"
-    }
+    printf '\naider-shell() { source "%s/aider-shell.sh" "$@"; }\n' "$(pwd)" >> ~/.zshrc
     ```
 2.  Reload your shell configuration for the changes to take effect:
     ```sh
