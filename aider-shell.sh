@@ -40,7 +40,7 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
         tail -n +2 "$temp_script"
         echo ""
 
-        read -p "(r)un, re(f)ine, or (q)uit? " action
+        read "action?(r)un, re(f)ine, or (q)uit? "
 
         case "$action" in
             r|R)
@@ -50,7 +50,7 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
                 eval "$command_to_run"
                 ;;
             f|F)
-                read -p "Enter your refinement: " user_request
+                read "user_request?Enter your refinement: "
                 break # break inner loop
                 ;;
             q|Q)
