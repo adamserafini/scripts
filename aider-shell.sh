@@ -1,27 +1,29 @@
 # This script is intended to be sourced. Abort if it's executed directly in zsh.
 if [[ -n "$ZSH_VERSION" && ${(%):-%x} == ${(%):-%N} ]]; then
-    echo "ERROR: This script must be sourced, not executed. Use '. $0' or 'source $0'" >&2
+    echo "ERROR: This script is being executed directly, but it must be sourced to work correctly." >&2
+    echo "Please follow the installation instructions in README.md to set it up as a shell function." >&2
+    echo "If you have already done this, ensure you have removed any old executable symlinks from your PATH" >&2
+    echo "and have reloaded your shell with 'source ~/.zshrc'." >&2
     return 1
 fi
 
-# Create a unique temporary file and make it executable
+# Create a unique temporary file
 temp_script=$(mktemp)
-chmod +x "$temp_script"
 
 # Write a shebang to the temp file
-echo "#!/bin/bash" > "$temp_script"
+echo "#!/bin/zsh" > "$temp_script"
 
-# Cleanup function to remove the temporary file on exit
+# Cleanup function to remove the temporary file
 cleanup() {
     echo "Cleaning up..."
     rm -f "$temp_script"
 }
-trap cleanup EXIT
 
 # Check for initial command argument
 if [ -z "$1" ]; then
     echo "Usage: $0 <initial request>"
-    exit 1
+    cleanup
+    return 1
 fi
 
 user_request="$@"
@@ -73,3 +75,4 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
 done
 
 echo "Exiting."
+cleanup
