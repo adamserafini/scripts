@@ -41,7 +41,6 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
             r|R)
                 echo "Running command..."
                 "$temp_script"
-                break 2 # break outer loop
                 ;;
             f|F)
                 read -p "Enter your refinement: " user_request
