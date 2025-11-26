@@ -17,15 +17,12 @@ trap cleanup EXIT
 
 user_request="$@"
 
-# REPL loop
-while true; do
-    if [ -z "$user_request" ]; then
-        read -p "Enter your request (or 'exit'/'quit'): " user_request
-    fi
+if [ -z "$user_request" ]; then
+    read -p "Enter your request (or 'exit'/'quit'): " user_request
+fi
 
-    if [[ "$user_request" == "exit" || "$user_request" == "quit" ]]; then
-        break
-    fi
+# REPL loop
+while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
 
     echo "Generating command..."
     # Use aider to modify the script, silently
@@ -44,7 +41,7 @@ while true; do
             r|R)
                 echo "Running command..."
                 "$temp_script"
-                user_request="" # Clear for next iteration to ask for new request
+                read -p "Enter your request (or 'exit'/'quit'): " user_request
                 break # break inner loop
                 ;;
             f|F)
@@ -52,7 +49,8 @@ while true; do
                 break # break inner loop
                 ;;
             q|Q)
-                break 2 # break outer loop
+                user_request="quit"
+                break # break inner loop
                 ;;
             *)
                 echo "Invalid option."
