@@ -4,13 +4,16 @@ A simple REPL to interactively build and run shell commands using `aider`.
 
 ## Installation (macOS/zsh)
 
-1.  Make the script executable:
+1.  Add the following function to your `~/.zshrc` file.
+    Make sure to replace `/path/to/your/aider-shell.sh` with the actual absolute path to where you've cloned this repository.
     ```sh
-    chmod +x aider-shell.sh
+    aider-shell() {
+        source /path/to/your/aider-shell.sh "$@"
+    }
     ```
-2.  Symlink it to a directory in your `$PATH`. This allows you to edit the script in place.
+2.  Reload your shell configuration for the changes to take effect:
     ```sh
-    ln -s "$(pwd)/aider-shell.sh" /usr/local/bin/aider-shell
+    source ~/.zshrc
     ```
 
 ## Usage
