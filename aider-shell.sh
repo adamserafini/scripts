@@ -49,6 +49,8 @@ while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
         case "$action" in
             r|R)
                 echo "Running command..."
+                command_to_run=$(tail -n +2 "$temp_script")
+                history -s "$command_to_run"
                 "$temp_script"
                 ;;
             f|F)
