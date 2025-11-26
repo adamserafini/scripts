@@ -15,10 +15,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
+user_request="$@"
+
 # REPL loop
 while true; do
-
-    read -p "Enter your request (or 'exit'/'quit'): " user_request
+    if [ -z "$user_request" ]; then
+        read -p "Enter your request (or 'exit'/'quit'): " user_request
+    fi
 
     if [[ "$user_request" == "exit" || "$user_request" == "quit" ]]; then
         break
@@ -37,6 +40,8 @@ while true; do
     echo "--------------------------------------------------"
     "$temp_script"
     echo "--------------------------------------------------"
+
+    user_request=""
 done
 
 echo "Exiting."
