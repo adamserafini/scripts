@@ -24,12 +24,12 @@ user_request="$@"
 # REPL loop
 while [[ "$user_request" != "exit" && "$user_request" != "quit" ]]; do
 
-    echo -n "Generating command"
+    printf "Generating command"
     # Use aider to modify the script, silently
     aider --yes --no-git "$temp_script" -m "$user_request" >/dev/null 2>&1 &
     pid=$!
     while kill -0 $pid 2>/dev/null; do
-        echo -n "."
+        printf "."
         sleep 1
     done
     wait $pid
