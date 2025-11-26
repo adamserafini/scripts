@@ -1,12 +1,3 @@
-# This script is intended to be sourced. Abort if it's executed directly in zsh.
-if [[ -n "$ZSH_VERSION" && ${(%):-%x} == ${(%):-%N} ]]; then
-    echo "ERROR: This script is being executed directly, but it must be sourced to work correctly." >&2
-    echo "Please follow the installation instructions in README.md to set it up as a shell function." >&2
-    echo "If you have already done this, ensure you have removed any old executable symlinks from your PATH" >&2
-    echo "and have reloaded your shell with 'source ~/.zshrc'." >&2
-    return 1
-fi
-
 # Create a unique temporary file
 temp_script=$(mktemp)
 
