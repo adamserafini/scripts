@@ -1,5 +1,5 @@
 # This script is intended to be sourced. Abort if it's executed directly in zsh.
-if [[ -n "$ZSH_VERSION" && "$ZSH_EVAL_CONTEXT" != *"source"* ]]; then
+if [[ -n "$ZSH_VERSION" && ${(%):-%x} == ${(%):-%N} ]]; then
     echo "ERROR: This script must be sourced, not executed. Use '. $0' or 'source $0'" >&2
     return 1
 fi
